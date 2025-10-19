@@ -16,5 +16,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: dist
+  base-directory: saas-landing-page-main/dist
   discard-paths: no
