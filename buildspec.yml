@@ -6,14 +6,12 @@ phases:
       nodejs: 18
     commands:
       - echo Installing dependencies...
-      - cd saas-landing-page-main
-      - npm install --legacy-peer-deps
+      - cd saas-landing-page-main && npm install --legacy-peer-deps
 
   build:
     commands:
       - echo Building the React app...
-      - cd saas-landing-page-main
-      - npm run build
+      - cd saas-landing-page-main && npm run build
 
 artifacts:
   files:
