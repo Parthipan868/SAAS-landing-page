@@ -6,19 +6,15 @@ phases:
       nodejs: 18
     commands:
       - echo Installing dependencies...
-      - ls -la
       - cd saas-landing-page-main && npm install --legacy-peer-deps
 
   build:
     commands:
       - echo Building the React app...
-      - pwd
-      - ls -la
-      - find . -name "package.json" -type f
-      - cd saas-landing-page-main && npm run build
+      - npm run build
 
 artifacts:
   files:
     - '**/*'
-  base-directory: saas-landing-page-main/dist
+  base-directory: dist
   discard-paths: no
