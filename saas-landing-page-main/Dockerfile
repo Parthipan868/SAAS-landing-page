@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:20-alpine AS builder
+FROM public.ecr.aws/docker/library/node:20-alpine AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN npm run build
 # Since we are extracting files for S3, we just need the builder stage really,
 # but usually a valid Dockerfile produces a runnable image.
 # We'll use a lightweight server just in case they want to run it elsewhere.
-FROM nginx:alpine
+FROM public.ecr.aws/docker/library/nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
