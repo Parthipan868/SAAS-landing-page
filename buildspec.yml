@@ -16,14 +16,12 @@ phases:
       - echo Build completed on `date`
       - echo Extracting build artifacts from Docker image...
       - docker create --name temp-container saas-landing-page:latest
-      # Explicitly create a unique output directory
-      - mkdir -p site-output
-      # Copy contents to this new directory
-      - docker cp temp-container:/usr/share/nginx/html/. ./site-output
+      # Copy contents directly to the root of the workspace
+      - docker cp temp-container:/usr/share/nginx/html/. .
       - docker rm temp-container
 
 artifacts:
   files:
     - '**/*'
-  base-directory: site-output
+  base-directory: .
   discard-paths: no
