@@ -16,8 +16,10 @@ phases:
       - echo Build completed on `date`
       - echo Extracting build artifacts from Docker image...
       - docker create --name temp-container saas-landing-page:latest
-      # Copy the 'dist' folder from the container to the local filesystem
-      - docker cp temp-container:/usr/share/nginx/html ./dist
+      # Explicitly create the directory
+      - mkdir -p dist
+      # Copy the contents of the html folder into dist
+      - docker cp temp-container:/usr/share/nginx/html/. ./dist
       - docker rm temp-container
 
 artifacts:
