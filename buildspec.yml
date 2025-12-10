@@ -17,13 +17,11 @@ phases:
       - echo Extracting build artifacts from Docker image...
       - docker create --name temp-container saas-landing-page:latest
       # Copy the 'dist' folder from the container to the local filesystem
-      # Ensure we overwrite or place it exactly where artifacts expects it
-      - mkdir -p saas-landing-page-main
-      - docker cp temp-container:/usr/share/nginx/html ./saas-landing-page-main/dist
+      - docker cp temp-container:/usr/share/nginx/html ./dist
       - docker rm temp-container
 
 artifacts:
   files:
     - '**/*'
-  base-directory: saas-landing-page-main/dist
+  base-directory: dist
   discard-paths: no
