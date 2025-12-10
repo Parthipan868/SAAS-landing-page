@@ -1,17 +1,26 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 18
+  pre_build:
     commands:
-      - echo Installing dependencies...
-      - cd saas-landing-page-main && npm install --legacy-peer-deps
-
+      - echo Logging in to Amazon ECR...
+      # (Optional) aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - echo Building the React app...
-      - npm run build
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - cd saas-landing-page-main
+      - docker build -t saas-landing-page:latest .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Extracting build artifacts from Docker image...
+      - docker create --name temp-container saas-landing-page:latest
+      # Copy the 'dist' folder from the container to the local filesystem
+      # Ensure we overwrite or place it exactly where artifacts expects it
+      - mkdir -p saas-landing-page-main
+      - docker cp temp-container:/usr/share/nginx/html ./saas-landing-page-main/dist
+      - docker rm temp-container
 
 artifacts:
   files:
