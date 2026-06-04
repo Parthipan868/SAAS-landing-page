@@ -17,3 +17,7 @@ This project demonstrates a fully automated CI/CD pipeline for a modern SaaS lan
     *   Pulls base images from **AWS ECR Public** to ensuring reliability.
 4.  Build artifacts (static files) are extracted and deployed to **Amazon S3**.
 5.  The website is globally available via S3 Static Website Hosting.
+
+
+A demonstration of the project's working can be viewed here:
+[View Demo Video](https://drive.google.com/file/d/1_vIvcfQISOk1b6vGvGtdQ1oV7KsrKUYh/view?usp=sharing)
